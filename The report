@@ -1,0 +1,31 @@
+SELECT IF(GRADES.GRADE>=8, STUDENTS.NAME, NULL), GRADES.GRADE, STUDENTS.MARKS
+FROM GRADES, STUDENTS
+WHERE STUDENTS.MARKS BETWEEN GRADES.MIN_MARK AND GRADES.MAX_MARK
+ORDER BY 
+    GRADES.GRADE DESC, 
+    STUDENTS.NAME ASC, 
+    STUDENTS.MARKS ASC;
+
+
+SELECT 
+    CASE 
+        WHEN g.Grade < 8 THEN NULL 
+        ELSE s.Name 
+    END AS Name, 
+    g.Grade, 
+    s.Marks
+FROM Students s
+JOIN Grades g 
+  ON s.Marks BETWEEN g.Min_Mark AND g.Max_Mark
+ORDER BY 
+    g.Grade DESC, 
+    s.Name ASC, 
+    s.Marks ASC;
+
+###Key Logic & Requirements
+• Non-Equi Join (BETWEEN): The Students and Grades tables do not share an explicit ID key. They are joined by evaluating if the student's Marks fall within the Min_Mark and Max_Mark boundaries for a given grade level.
+• The CASE Statement: If a student's calculated grade is less than 8, their name must be masked with a NULL value; otherwise, their real name is printed.
+• Three-Tiered Sorting (ORDER BY):
+	1. First, sort by Grade in descending order.
+	2. For high earners (Grades 8–10), tie-break alphabetically by Name in ascending order.
+	3. For lower grades (Grades 1–7) where names are NULL, tie-break by their actual numeric Marks in ascending order
