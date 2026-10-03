@@ -1,0 +1,11 @@
+SELECT COUNTRY.CONTINENT, FLOOR(AVG(CITY.POPULATION)) 
+FROM CITY 
+JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE 
+GROUP BY COUNTRY.CONTINENT;
+
+
+### Explanation
+* **`JOIN`**: Combines the `CITY` and `COUNTRY` tables using the matching keys `CITY.CountryCode` and `COUNTRY.Code`.
+* **`AVG()`**: Calculates the average city population for each group.
+* **`FLOOR()`**: Rounds the average value down to the nearest whole integer.
+* **`GROUP BY`**: Groups the aggregated results by `COUNTRY.Continent`.
